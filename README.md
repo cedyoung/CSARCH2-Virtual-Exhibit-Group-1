@@ -1,7 +1,9 @@
 # CSARCH2-Virtual-Exhibit-Group-1
 
-#Title
+Title:
+
 Members:
 
-Topic Theme
-Tech Stack Plan
+Topic Theme:
+
+Tech Stack Plan:
