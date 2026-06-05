@@ -1,9 +1,19 @@
 # CSARCH2-Virtual-Exhibit-Group-1
 
-Title:
+## Title: Inside the ALU: How Computers Perform Arithmetic and Logic Operations
 
-Members:
+**Members:**
+- Member 1: Corral, Matthew
+- Member 2: De Castro, Jediaelle Denise
+- Member 3: Del Mundo, Joshua
+- Member 4: Fabricante, Jeruel
+- Member 5: Young, Cedric
 
-Topic Theme:
+## Topic Theme:
+This virtual exhibit explains how computers perform arithmetic and logic operations through the **Arithmetic Logic Unit**, also known as the **ALU**. The ALU is a major part of the CPU responsible for processing binary operations such as addition, subtraction, AND, OR, XOR, NOT, bit shifting, and comparison.
 
-Tech Stack Plan:
+The goal of this exhibit is to help users understand that computers do not calculate in the same way humans do. Instead, computers process numbers as binary values made of `0`s and `1`s. The ALU receives binary inputs, applies a selected operation, produces a binary result, and updates status flags that help the CPU make decisions.
+
+The exhibit includes an interactive calculator called the **Mini ALU Simulator**, where users can enter numbers, choose an operation, and see how the ALU processes the result in binary form.
+
+**Tech Stack Plan:**
