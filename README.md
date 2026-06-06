@@ -34,4 +34,10 @@ The simulation will display the binary result.
 | Assets | PNG |
 | Repository | GitHub |
 
+The Mini ALU Calculator is an interactive component that demonstrates how an Arithmetic Logic Unit processes arithmetic and logic operations inside a computer. Since the project requires at least one interactive element for the virtual exhibit, this calculator will serve as the main hands-on activity for users.
 
+The user will enter two values, called Operand A and Operand B. These values may be typed in decimal or binary depending on the final design. After entering the values, the user will choose an operation such as ADD, SUB, AND, OR, XOR, NOT, Shift Left, or Shift Right.
+
+Once the user clicks the Run button, the calculator will first convert the inputs into binary form because the ALU works using bits, or 0s and 1s.
+
+Overall, the calculator is not just a normal calculator. It is designed to show how a computer thinks: by converting numbers into binary, processing them through ALU-style operations, and producing a result.
