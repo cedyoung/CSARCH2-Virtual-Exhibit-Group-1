@@ -22,4 +22,14 @@ The main interactive feature will allow users to input two 4-bit binary numbers,
 - Binary Input B, such as 1100
 - Operation: ADD, SUBTRACT AND, OR, OR XOR
 
-The simulation will display the binary result and decimal equivalent.
+The simulation will display the binary result.
+
+| Part | Plan |
+| --- | --- | --- |
+| Main framework | Astro 6 |
+| Runtime | Node.js 26 |
+| Runtime | MDX |
+| Runtime | React JSX |
+| Runtime | CSS / Astro scoped styles |
+| Assets | PNG |
+| Repository | GitHub |
