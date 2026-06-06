@@ -29,11 +29,12 @@ The simulation will display the binary result.
 | Main framework | Astro 6 |
 | Runtime | Node.js 26 |
 | Content | MDX |
-| Interactive componenet | React JSX |
+| Interactive component | React JSX |
 | Styling | CSS / Astro scoped styles |
 | Assets | PNG |
 | Repository | GitHub |
 
+## Proposed Interactive Element:
 The Mini ALU Calculator is an interactive component that demonstrates how an Arithmetic Logic Unit processes arithmetic and logic operations inside a computer. Since the project requires at least one interactive element for the virtual exhibit, this calculator will serve as the main hands-on activity for users.
 
 The user will enter two values, called Operand A and Operand B. These values may be typed in decimal or binary depending on the final design. After entering the values, the user will choose an operation such as ADD, SUB, AND, OR, XOR, NOT, Shift Left, or Shift Right.
