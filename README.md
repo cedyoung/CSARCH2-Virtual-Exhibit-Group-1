@@ -23,3 +23,15 @@ The main interactive feature will allow users to input two 4-bit binary numbers,
 - Operation: ADD, SUBTRACT AND, OR, OR XOR
 
 The simulation will display the binary result.
+
+| Part | Plan |
+| ---- | ---- |
+| Main framework | Astro 6 |
+| Runtime | Node.js 26 |
+| Content | MDX |
+| Interactive componenet | React JSX |
+| Styling | CSS / Astro scoped styles |
+| Assets | PNG |
+| Repository | GitHub |
+
+
