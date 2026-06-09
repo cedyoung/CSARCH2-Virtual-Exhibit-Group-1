@@ -29,6 +29,7 @@ The exhibit includes an interactive calculator called the **Mini ALU Simulator**
 
 ## Proposed Interactive Element:
 **Inside the mini ALU Simulator**
+
 Two 4-bit binary inputs: Operand A and Operand B
 Operation selector: ADD and SUB
 Adder mode selector: Ripple Carry or Carry Lookahead
@@ -38,11 +39,13 @@ Decimal Equivalent
 The simulator will not only act as a calculator. Its purpose is to show what happens inside the ALU when binary addition or subtraction is processed using two different adder circuits.
 
 **Simulator Flow**
+
 User enters Operand A and Operand B as 4-bit binary values
 User selects an operation ADD or SUB
 User selects an adder mode Ripple carry adder or Carry lookahead adder
 The simulator displays the carry values, binary result and decimal equivalent
 
 **Description**
+
 This revised proposal gives the Mini ALU Simulator a clearer and more realistic scope. Instead of attempting to cover many ALU operations vaguely, the exhibit will focus on addition and subtraction only. For both operations, users will be able to compare how a Ripple Carry Adder and a Carry Lookahead Adder process the same 4-bit inputs.
 
