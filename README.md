@@ -38,12 +38,14 @@ Decimal Equivalent
 
 The simulator will not only act as a calculator. Its purpose is to show what happens inside the ALU when binary addition or subtraction is processed using two different adder circuits.
 
+
 **Simulator Flow**
 
 User enters Operand A and Operand B as 4-bit binary values
 User selects an operation ADD or SUB
 User selects an adder mode Ripple carry adder or Carry lookahead adder
 The simulator displays the carry values, binary result and decimal equivalent
+
 
 **Description**
 
