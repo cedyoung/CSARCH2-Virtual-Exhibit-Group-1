@@ -35,10 +35,21 @@ The simulation will display the binary result.
 | Repository | GitHub |
 
 ## Proposed Interactive Element:
-The Mini ALU Calculator is an interactive component that demonstrates how an Arithmetic Logic Unit processes arithmetic and logic operations inside a computer. Since the project requires at least one interactive element for the virtual exhibit, this calculator will serve as the main hands-on activity for users.
+**Inside the mini ALU Simulator**
+Two 4-bit binary inputs: Operand A and Operand B
+Operation selector: ADD and SUB
+Adder mode selector: Ripple Carry or Carry Lookahead
+Binary result
+Decimal Equivalent
 
-The user will enter two values, called Operand A and Operand B. These values may be typed in decimal or binary depending on the final design. After entering the values, the user will choose an operation such as ADD, SUB, AND, OR, XOR, NOT, Shift Left, or Shift Right.
+The simulator will not only act as a calculator. Its purpose is to show what happens inside the ALU when binary addition or subtraction is processed using two different adder circuits.
 
-Once the user clicks the Run button, the calculator will first convert the inputs into binary form because the ALU works using bits, or 0s and 1s.
+**Simulator Flow**
+User enters Operand A and Operand B as 4-bit binary values
+User selects an operation ADD or SUB
+User selects an adder mode Ripple carry adder or Carry lookahead adder
+The simulator displays the carry values, binary result and decimal equivalent
 
-Overall, the calculator is not just a normal calculator. It is designed to show how a computer thinks: by converting numbers into binary, processing them through ALU-style operations, and producing a result.
+**Description**
+This revised proposal gives the Mini ALU Simulator a clearer and more realistic scope. Instead of attempting to cover many ALU operations vaguely, the exhibit will focus on addition and subtraction only. For both operations, users will be able to compare how a Ripple Carry Adder and a Carry Lookahead Adder process the same 4-bit inputs.
+
