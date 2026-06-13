@@ -68,3 +68,5 @@ This is the exhibit's key educational differentiator — two real circuit strate
 **Description**
 This revised proposal gives the Mini ALU Simulator a clearer and more realistic scope. Instead of attempting to cover many ALU operations vaguely, the exhibit will focus on addition and subtraction only. For both operations, users will be able to compare how a Ripple Carry Adder and a Carry Lookahead Adder process the same 4-bit inputs.
 
+## Snapshot of Layout Design:
+Link to Figma: https://www.figma.com/make/GDR34ZTPlb8ET8viaV19dM/Mini-ALU-Simulator?t=o8ehtl5ZBDA8LAcR-1
