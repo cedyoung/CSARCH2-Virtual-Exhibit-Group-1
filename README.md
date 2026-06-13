@@ -52,17 +52,17 @@ This is the exhibit's key educational differentiator — two real circuit strate
 **Carry Lookahead Adder (CLA)** — computes all carries simultaneously before any sum bits are calculated. It uses two pre-computed signals per bit: Generate (G = A AND B), meaning this bit will always produce a carry regardless of input carry, and Propagate (P = A OR B), meaning this bit will pass a carry through if one arrives. From G and P, all four carry values are derived in parallel using boolean formulas. The simulator exposes the G and P table so users can see these signals. Faster, but more complex circuitry.
 
 **Output**
-A step view table showing A, the effective B (inverted if SUB), the carry-in values per bit position, and the resulting SUM bits — laid out the same way a hardware engineer would trace a circuit
-The binary result displayed as four lit bit cells
-The decimal equivalent of the result
-An overflow warning if the carry-out bit fires, indicating the true result exceeds the 4-bit range
+- A step view table showing A, the effective B (inverted if SUB), the carry-in values per bit position, and the resulting SUM bits — laid out the same way a hardware engineer would trace a circuit
+- The binary result displayed as four lit bit cells
+- The decimal equivalent of the result
+- An overflow warning if the carry-out bit fires, indicating the true result exceeds the 4-bit range
 
 
 **Simulator Flow**
-User enters Operand A and Operand B as 4-bit binary values
-User selects an operation ADD or SUB
-User selects an adder mode Ripple carry adder or Carry lookahead adder
-The simulator displays the carry values, binary result and decimal equivalent
+- User enters Operand A and Operand B as 4-bit binary values
+- User selects an operation ADD or SUB
+- User selects an adder mode Ripple carry adder or Carry lookahead adder
+- The simulator displays the carry values, binary result and decimal equivalent
 
 
 **Description**
