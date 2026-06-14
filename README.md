@@ -69,6 +69,17 @@ This is the exhibit's key educational differentiator — two real circuit strate
 This revised proposal gives the Mini ALU Simulator a clearer and more realistic scope. Instead of attempting to cover many ALU operations vaguely, the exhibit will focus on addition and subtraction only. For both operations, users will be able to compare how a Ripple Carry Adder and a Carry Lookahead Adder process the same 4-bit inputs.
 
 ## Snapshot of Layout Design:
-<img width="1451" height="786" alt="image" src="https://github.com/user-attachments/assets/e334b01b-479a-4ac5-b000-746561a040b0" />
+<img width="1917" height="726" alt="image" src="https://github.com/user-attachments/assets/e0e14c45-4b94-47c8-af5d-bccecf8cd9b6" />
+<img width="1917" height="651" alt="image" src="https://github.com/user-attachments/assets/cd3107d8-32b7-4d63-a9e0-f1a2df854717" />
+<img width="1917" height="722" alt="image" src="https://github.com/user-attachments/assets/17e2f232-39a5-4c71-886a-a294b14877ff" />
+<img width="1917" height="762" alt="image" src="https://github.com/user-attachments/assets/22118a75-b0da-4735-85c0-5d567328db08" />
+<img width="1917" height="742" alt="image" src="https://github.com/user-attachments/assets/4bfe8a72-cce7-40a8-89dd-a1a247052cdc" />
+<img width="1917" height="682" alt="image" src="https://github.com/user-attachments/assets/a4d023cb-397b-43fb-9342-1556ec1c1987" />
+<img width="1917" height="161" alt="image" src="https://github.com/user-attachments/assets/025f3011-a2d9-49af-b956-d602c0cf99b5" />
+<img width="1911" height="752" alt="image" src="https://github.com/user-attachments/assets/23baf5c1-69d0-4802-bacc-c741a4fce63d" />
+<img width="1917" height="267" alt="image" src="https://github.com/user-attachments/assets/f8aaedeb-f6d8-47c3-89eb-be4cd01a3761" />
+<img width="1917" height="747" alt="image" src="https://github.com/user-attachments/assets/a9731648-8b5e-4763-9bda-def2a2d92ecf" />
+
+
 
 Link to Figma: https://www.figma.com/make/GDR34ZTPlb8ET8viaV19dM/Mini-ALU-Simulator?t=o8ehtl5ZBDA8LAcR-1
