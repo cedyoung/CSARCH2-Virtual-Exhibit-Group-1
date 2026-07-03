@@ -1,0 +1,114 @@
+/* ---------------------------------------------------------------
+   ALU EXHIBIT — design tokens
+   Palette: dark PCB laminate + amber signal trace, like a bench
+   power supply next to an oscilloscope. Type: IBM Plex family,
+   chosen because IBM's own datasheets are part of this subject's
+   visual history.
+----------------------------------------------------------------*/
+:root {
+  /* color */
+  --bg: #0b0f0d;
+  --panel: #131a16;
+  --panel-raised: #182019;
+  --border: #2a3b31;
+  --border-strong: #3d5445;
+  --paper: #e8e4d8;
+  --paper-dim: #8f988e;
+  --trace: #ffb000;
+  --trace-dim: #6b4e16;
+  --carry: #ff5d3a;
+  --ok: #6ee7a8;
+
+  /* type */
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-label: 'IBM Plex Sans Condensed', system-ui, sans-serif;
+
+  /* layout */
+  --radius: 3px;
+  --max-width: 1180px;
+  --gutter: clamp(1.25rem, 4vw, 3rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  background-image: radial-gradient(circle at 20% 0%, rgba(255, 176, 0, 0.05), transparent 45%);
+  color: var(--paper);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.6em;
+  letter-spacing: -0.01em;
+}
+
+p {
+  margin: 0 0 1em;
+  max-width: 62ch;
+}
+
+a {
+  color: var(--trace);
+}
+
+.eyebrow {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  color: var(--paper-dim);
+}
+
+.wrap {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.hairline {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+
+.mono-value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* reduced motion: kill non-essential animation everywhere */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* visible keyboard focus, styled to match the panel-light aesthetic */
+:focus-visible {
+  outline: 2px solid var(--trace);
+  outline-offset: 2px;
+}

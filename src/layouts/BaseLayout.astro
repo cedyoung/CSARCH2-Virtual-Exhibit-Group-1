@@ -1,0 +1,107 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = 'A virtual exhibit on the Arithmetic Logic Unit — the part of a processor that adds, compares, and decides.' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · The ALU Exhibit</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22><rect width=%2216%22 height=%2216%22 fill=%22%230b0f0d%22/><text x=%228%22 y=%2212%22 font-size=%2210%22 text-anchor=%22middle%22 fill=%22%23ffb000%22 font-family=%22monospace%22>+</text></svg>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Sans+Condensed:wght@600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="wrap site-header__row">
+        <a class="site-header__mark" href="/">
+          <span aria-hidden="true">⚙</span> THE ALU EXHIBIT
+        </a>
+        <nav class="site-header__nav">
+          <a href="/#anatomy">Anatomy</a>
+          <a href="/#operations">Operations</a>
+          <a href="/#simulator">Simulator</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap site-footer__row">
+        <p class="eyebrow">A virtual exhibit · built with Astro, MDX &amp; React</p>
+        <p class="eyebrow">Every bit shown here is computed live in your browser</p>
+      </div>
+    </footer>
+
+    <style>
+      .site-header {
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        background: color-mix(in srgb, var(--bg) 92%, transparent);
+        backdrop-filter: blur(6px);
+        z-index: 20;
+      }
+      .site-header__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-block: 1rem;
+        gap: 1.5rem;
+      }
+      .site-header__mark {
+        font-family: var(--font-mono);
+        font-weight: 600;
+        font-size: 0.85rem;
+        letter-spacing: 0.08em;
+        color: var(--paper);
+        text-decoration: none;
+      }
+      .site-header__mark span {
+        color: var(--trace);
+      }
+      .site-header__nav {
+        display: flex;
+        gap: 1.5rem;
+        font-family: var(--font-label);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-size: 0.78rem;
+      }
+      .site-header__nav a {
+        color: var(--paper-dim);
+        text-decoration: none;
+      }
+      .site-header__nav a:hover {
+        color: var(--trace);
+      }
+      .site-footer {
+        border-top: 1px solid var(--border);
+        margin-top: 6rem;
+      }
+      .site-footer__row {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding-block: 1.5rem;
+      }
+    </style>
+  </body>
+</html>

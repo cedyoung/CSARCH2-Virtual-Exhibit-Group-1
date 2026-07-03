@@ -1,0 +1,281 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AluSchematic from '../components/AluSchematic.astro';
+import OperationCard from '../components/OperationCard.astro';
+import ALUSimulator from '../components/ALUSimulator.jsx';
+import AdderCircuit from '../components/AdderCircuit.jsx';
+import { getCollection } from 'astro:content';
+
+const operations = (await getCollection('operations')).sort((a, b) => a.data.order - b.data.order);
+
+const timeline = [
+  {
+    year: '1937–44',
+    title: 'Relay logic',
+    body: 'Electromechanical relays open and close to perform binary addition — slow, audible, and the first machines to compute with switches instead of gears.',
+  },
+  {
+    year: '1945',
+    title: 'Vacuum-tube arithmetic',
+    body: "ENIAC's accumulators add and subtract using thousands of tubes, trading relay speed limits for heat and constant tube failures.",
+  },
+  {
+    year: '1958–63',
+    title: 'Discrete transistors',
+    body: 'Transistorized logic shrinks the arithmetic unit onto circuit boards small enough to fit inside a single cabinet.',
+  },
+  {
+    year: '1970',
+    title: 'The 74181 IC',
+    body: 'A single 24-pin chip packages a full 4-bit ALU — sixteen arithmetic and logic operations selectable by four control lines.',
+  },
+  {
+    year: '1971–today',
+    title: 'Embedded in the CPU',
+    body: "From the Intel 4004 onward, the ALU stops being a separate unit and becomes a block on the processor's own die.",
+  },
+];
+---
+
+<BaseLayout title="Home">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero__grid">
+      <div class="hero__copy">
+        <p class="eyebrow">Virtual exhibit · component 3 of the processor</p>
+        <h1>The Arithmetic Logic Unit</h1>
+        <p class="hero__lede">
+          Every add, compare, and bitwise decision a computer makes passes through one small
+          circuit. This exhibit opens up the ALU — the block that turns two binary numbers and an
+          opcode into a result and a set of flags — and lets you operate one yourself.
+        </p>
+      </div>
+      <div class="hero__diagram">
+        <AluSchematic />
+      </div>
+    </div>
+  </section>
+
+  <hr class="hairline" />
+
+  <!-- ANATOMY -->
+  <section id="anatomy" class="section">
+    <div class="wrap">
+      <p class="eyebrow">01 · Anatomy</p>
+      <h2>Two operands, one opcode, one answer</h2>
+      <div class="anatomy__grid">
+        <article class="anatomy__item">
+          <h3>Operands — A &amp; B</h3>
+          <p>
+            The two binary numbers the ALU acts on. In a real CPU these arrive from registers;
+            here, you'll set them yourself with the switches below.
+          </p>
+        </article>
+        <article class="anatomy__item">
+          <h3>Opcode</h3>
+          <p>
+            A short binary instruction from the control unit that tells the ALU which operation
+            to run — add, subtract, AND, shift, and so on.
+          </p>
+        </article>
+        <article class="anatomy__item">
+          <h3>Result &amp; flags</h3>
+          <p>
+            The output bus carries the answer. Alongside it, four status flags — Zero, Carry,
+            Negative, Overflow — report facts about that answer the rest of the CPU can branch on.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hairline" />
+
+  <!-- OPERATIONS -->
+  <section id="operations" class="section">
+    <div class="wrap">
+      <p class="eyebrow">02 · Operations</p>
+      <h2>The instruction set</h2>
+      <p>Each card is a datasheet for one operation the ALU can run. Open one for its truth table and gate-level view.</p>
+      <div class="operations__grid">
+        {
+          operations.map((op) => (
+            <OperationCard
+              id={op.id}
+              title={op.data.title}
+              mnemonic={op.data.mnemonic}
+              opcode={op.data.opcode}
+              symbol={op.data.symbol}
+              summary={op.data.summary}
+              diagram={op.data.diagram}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <hr class="hairline" />
+
+  <!-- SIMULATOR -->
+  <section id="simulator" class="section">
+    <div class="wrap">
+      <p class="eyebrow">03 · Try it</p>
+      <h2>Operate a 4-bit ALU</h2>
+      <p>
+        Toggle the switches for A and B, pick an operation, and watch the result and status flags
+        update live. This is exactly what the chip is doing — just slowed down to bit speed.
+      </p>
+      <ALUSimulator client:load />
+
+      <div class="simulator__divider">
+        <p class="eyebrow">Inside the ADD/SUB path</p>
+        <h3>How that carry actually gets computed</h3>
+        <p>
+          When the operation above is ADD or SUB, the ALU has to add two 4-bit numbers — and that
+          means resolving a carry bit at every position. There's more than one way to wire that
+          carry chain; switch circuit styles below and watch how differently they settle.
+        </p>
+      </div>
+      <AdderCircuit client:visible />
+    </div>
+  </section>
+
+  <hr class="hairline" />
+
+  <!-- HISTORY -->
+  <section id="history" class="section">
+    <div class="wrap">
+      <p class="eyebrow">04 · How it got here</p>
+      <h2>From relays to silicon</h2>
+      <ol class="timeline">
+        {
+          timeline.map((entry) => (
+            <li class="timeline__item">
+              <span class="timeline__year mono-value">{entry.year}</span>
+              <div>
+                <h3 class="timeline__title">{entry.title}</h3>
+                <p>{entry.body}</p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <style>
+    .hero {
+      padding-block: clamp(3rem, 8vw, 6rem) 3rem;
+    }
+    .hero__grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: clamp(2rem, 5vw, 4rem);
+      align-items: center;
+    }
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+    }
+    .hero__lede {
+      color: var(--paper-dim);
+      font-size: 1.05rem;
+    }
+    .hero__diagram {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--panel);
+      padding: 1.5rem;
+    }
+    @media (max-width: 860px) {
+      .hero__grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .section {
+      padding-block: clamp(3rem, 6vw, 5rem);
+    }
+    .section h2 {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      max-width: 40ch;
+    }
+
+    .simulator__divider {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+    }
+    .simulator__divider h3 {
+      font-size: 1.1rem;
+      margin-top: 0.4rem;
+    }
+    .simulator__divider p {
+      color: var(--paper-dim);
+      font-size: 0.92rem;
+    }
+
+    .anatomy__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .anatomy__item {
+      border-top: 2px solid var(--trace-dim);
+      padding-top: 0.9rem;
+    }
+    .anatomy__item h3 {
+      font-size: 1rem;
+    }
+    .anatomy__item p {
+      color: var(--paper-dim);
+      font-size: 0.92rem;
+    }
+
+    .operations__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2rem;
+    }
+
+    .timeline {
+      list-style: none;
+      margin: 2rem 0 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+    .timeline__item {
+      display: grid;
+      grid-template-columns: 7rem 1fr;
+      gap: 1.25rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+    .timeline__item:first-child {
+      border-top: none;
+      padding-top: 0;
+    }
+    .timeline__year {
+      color: var(--trace);
+      font-size: 0.85rem;
+    }
+    .timeline__title {
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+    }
+    .timeline p {
+      color: var(--paper-dim);
+      font-size: 0.92rem;
+    }
+    @media (max-width: 560px) {
+      .timeline__item {
+        grid-template-columns: 1fr;
+        gap: 0.4rem;
+      }
+    }
+  </style>
+</BaseLayout>
