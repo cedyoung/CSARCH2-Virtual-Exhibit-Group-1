@@ -140,13 +140,100 @@ const timeline = [
       <AdderCircuit client:visible />
     </div>
   </section>
+  <hr class="hairline" />
+
+  <!-- ADDER CIRCUITS COMPARED -->
+  <section id="adder-comparison" class="section">
+    <div class="wrap">
+      <p class="eyebrow">04 · Adder Circuits Compared</p>
+      <h2>Ripple Carry vs. Carry Lookahead</h2>
+      
+      <div class="comparison__grid">
+        <!-- RCA Card -->
+        <div class="comparison__card">
+          <div class="card__header">
+            <span class="badge badge--rca">RCA</span>
+            <h3>Ripple Carry Adder</h3>
+          </div>
+          <p class="card__desc">Each Full Adder waits for the carry-out from the previous stage before computing its sum bit.</p>
+          <div class="card__lists">
+            <div class="list__group">
+              <h4>Advantages</h4>
+              <ul>
+                <li class="pos">Simple circuit design</li>
+                <li class="pos">Fewer logic gates</li>
+                <li class="pos">Easy to implement</li>
+              </ul>
+            </div>
+            <div class="list__group">
+              <h4>Trade-offs</h4>
+              <ul>
+                <li class="neg">Slow — each carry must ripple forward</li>
+                <li class="neg">Delay grows linearly with bit width</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- CLA Card -->
+        <div class="comparison__card">
+          <div class="card__header">
+            <span class="badge badge--cla">CLA</span>
+            <h3>Carry Lookahead Adder</h3>
+          </div>
+          <p class="card__desc">Uses Generate (G) and Propagate (P) signals to calculate all carry values simultaneously before summing.</p>
+          <div class="card__lists">
+            <div class="list__group">
+              <h4>Advantages</h4>
+              <ul>
+                <li class="pos">Fast — all carries computed at once</li>
+                <li class="pos">Constant delay (independent of width)</li>
+                <li class="pos">Used in real CPUs</li>
+              </ul>
+            </div>
+            <div class="list__group">
+              <h4>Trade-offs</h4>
+              <ul>
+                <li class="neg">More complex circuitry</li>
+                <li class="neg">Higher gate count</li>
+                <li class="neg">More wiring overhead</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUBTRACTION PANEL -->
+      <div class="subtraction__panel">
+        <h3>How Subtraction Works: Two's Complement</h3>
+        <p>Instead of building a separate subtraction circuit, the ALU reuses the adder. To compute A − B, it calculates A + (−B). In binary, the negative of a number is its <strong>two's complement</strong>: flip all bits (~B), then add 1.</p>
+        
+        <div class="steps__grid mono-value">
+          <div class="step__item">
+            <span class="step__label">Step 1: Original B</span>
+            <span class="step__val text-blue">B = 0011 (3)</span>
+          </div>
+          <div class="step__item">
+            <span class="step__label">Step 2: Invert all bits</span>
+            <span class="step__val text-orange">~B = 1100</span>
+          </div>
+          <div class="step__item">
+            <span class="step__label">Step 3: Add 1 (carry-in = 1)</span>
+            <span class="step__val text-green">~B + 1 = 1101 (-3)</span>
+          </div>
+        </div>
+
+        <p class="subtraction__footer">In the simulator, when SUB is selected, Operand B is automatically inverted and the initial carry-in is set to 1 — exactly replicating this hardware behavior.</p>
+      </div>
+    </div>
+  </section>
 
   <hr class="hairline" />
 
   <!-- HISTORY -->
   <section id="history" class="section">
     <div class="wrap">
-      <p class="eyebrow">04 · How it got here</p>
+      <p class="eyebrow">05 · How it got here</p>
       <h2>From relays to silicon</h2>
       <ol class="timeline">
         {
@@ -276,6 +363,110 @@ const timeline = [
         grid-template-columns: 1fr;
         gap: 0.4rem;
       }
+    }
+    .comparison__grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+    .comparison__card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+    }
+    .card__header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .badge {
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+    }
+    .badge--rca { background: rgba(0, 150, 136, 0.2); color: #009688; }
+    .badge--cla { background: rgba(255, 111, 0, 0.2); color: #ff6f00; }
+    
+    .card__desc {
+      color: var(--paper-dim);
+      font-size: 0.95rem;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+    .card__lists {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .list__group h4 {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+    }
+    .list__group :global(h4:nth-of-type(1)) { color: #009688; } /* Advantages header color */
+    .list__group :global(.trade-offs h4) { color: #ff6f00; } /* Trade-offs header color */
+    
+    .list__group ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+    }
+    .list__group li.pos::before { content: "✓ "; color: #009688; margin-right: 0.25rem; }
+    .list__group li.neg::before { content: "– "; color: #ff6f00; margin-right: 0.25rem; }
+
+    /* SUBTRACTION PANEL */
+    .subtraction__panel {
+      margin-top: 2rem;
+      background: rgba(var(--panel-rgb), 0.5); /* slightly distinct panel background */
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+    }
+    .subtraction__panel h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .subtraction__panel p {
+      color: var(--paper-dim);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .steps__grid {
+      background: #07111e; /* matching dark inner shell */
+      border-radius: 6px;
+      padding: 1.25rem;
+      margin-block: 1.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .step__item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .step__label {
+      font-size: 0.8rem;
+      color: #52667d;
+    }
+    .step__val {
+      font-weight: bold;
+      font-size: 0.95rem;
+    }
+    .text-blue { color: #38bdf8; }
+    .text-orange { color: #fb923c; }
+    .text-green { color: #4ade80; }
+    .subtraction__footer {
+      font-style: italic;
     }
   </style>
 </BaseLayout>
