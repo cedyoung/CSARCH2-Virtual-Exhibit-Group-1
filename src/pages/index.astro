@@ -251,6 +251,81 @@ const timeline = [
     </div>
   </section>
 
+<hr class="hairline" />
+
+  <!-- TECH STACK -->
+  <section id="tech-stack" class="section">
+    <div class="wrap tech-stack__grid">
+      
+      <!-- Left Column -->
+      <div class="tech-stack__info">
+        <p class="eyebrow">06 · Tech Stack</p>
+        <h2>How This Exhibit Is Built</h2>
+        <p class="tech-stack__lede">
+          The exhibit is built as a static site using Astro 6, with MDX for content authoring and React JSX for the interactive ALU Simulator component. Styling uses CSS with Astro scoped styles, and all assets are served as PNG images from a GitHub repository.
+        </p>
+
+        <!-- Nested Plan Box -->
+        <div class="stack-plan__box">
+          <div class="stack-plan__header">
+            <span class="drag-handle">::</span> Tech Stack Plan:
+          </div>
+          <table class="stack-plan__table">
+            <thead>
+              <tr>
+                <th>Part</th>
+                <th>Plan</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Main framework</td><td>Astro 6</td></tr>
+              <tr><td>Runtime</td><td class="text-link">Node.js 26</td></tr>
+              <tr><td>Content</td><td>MDX</td></tr>
+              <tr><td>Interactive component</td><td>React JSX</td></tr>
+              <tr><td>Styling</td><td>CSS / Astro scoped styles</td></tr>
+              <tr><td>Assets</td><td>PNG</td></tr>
+              <tr><td>Repository</td><td>GitHub</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Right Column -->
+      <div class="tech-stack__pills">
+        <div class="stack-pill">
+          <span class="pill__label">Main framework</span>
+          <span class="pill__value text-green">Astro 6</span>
+        </div>
+        <div class="stack-pill">
+          <span class="pill__label">Runtime</span>
+          <span class="pill__value text-green">Node.js 26</span>
+        </div>
+        <div class="stack-pill">
+          <span class="pill__label">Content</span>
+          <span class="pill__value text-green">MDX</span>
+        </div>
+        <div class="stack-pill">
+          <span class="pill__label">Interactive component</span>
+          <span class="pill__value text-green">React JSX</span>
+        </div>
+        <div class="stack-pill">
+          <span class="pill__label">Styling</span>
+          <span class="pill__value text-green">CSS / Astro scoped styles</span>
+        </div>
+        <div class="stack-pill">
+          <span class="pill__label">Assets</span>
+          <span class="pill__value text-green">PNG</span>
+        </div>
+        <div class="stack-pill">
+          <span class="pill__label">Repository</span>
+          <span class="pill__value text-green">GitHub</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
   <style>
     .hero {
       padding-block: clamp(3rem, 8vw, 6rem) 3rem;
@@ -467,6 +542,96 @@ const timeline = [
     .text-green { color: #4ade80; }
     .subtraction__footer {
       font-style: italic;
+    }
+    .tech-stack__grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 3rem;
+      align-items: start;
+      margin-top: 2rem;
+    }
+    .tech-stack__info h2 {
+      margin-bottom: 1rem;
+    }
+    .tech-stack__lede {
+      color: #708198;
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    /* LEFT EMBEDDED BOX */
+    .stack-plan__box {
+      background: #04090f;
+      border: 1px solid #101f30;
+      border-radius: 8px;
+      padding: 1.25rem;
+      font-family: monospace;
+      font-size: 0.85rem;
+    }
+    .stack-plan__header {
+      color: #8b9bb4;
+      margin-bottom: 0.75rem;
+      font-weight: bold;
+    }
+    .drag-handle {
+      color: #384a62;
+      margin-right: 0.25rem;
+    }
+    .stack-plan__table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+    .stack-plan__table th, 
+    .stack-plan__table td {
+      border: 1px solid #162a3f;
+      padding: 0.5rem 0.75rem;
+      color: #8b9bb4;
+    }
+    .stack-plan__table th {
+      color: #ffffff;
+      font-weight: 600;
+    }
+    .stack-plan__table td.text-link {
+      color: #00a8ff;
+      text-decoration: underline;
+    }
+
+    /* RIGHT PILL PIECES */
+    .tech-stack__pills {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .stack-pill {
+      background: rgba(16, 31, 48, 0.4);
+      border: 1px solid #101f30;
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .pill__label {
+      color: #8b9bb4;
+      font-size: 0.95rem;
+    }
+    .pill__value {
+      font-family: monospace;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .pill__value.text-green {
+      color: #00ffcc; /* Vibrant Figma neon accent cyan/green */
+    }
+
+    /* RESPONSIVE FALLBACK */
+    @media (max-width: 860px) {
+      .tech-stack__grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
     }
   </style>
 </BaseLayout>
