@@ -13,9 +13,9 @@
     "sync": "astro sync"
   },
   "dependencies": {
-    "astro": "^6.4.0",
-    "@astrojs/react": "^5.0.0",
     "@astrojs/mdx": "^6.0.0",
+    "@astrojs/react": "^5.0.0",
+    "astro": "^6.4.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   }

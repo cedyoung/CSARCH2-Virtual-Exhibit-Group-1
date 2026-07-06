@@ -5,6 +5,7 @@ import OperationCard from '../components/OperationCard.astro';
 import ALUSimulator from '../components/ALUSimulator.jsx';
 import AdderCircuit from '../components/AdderCircuit.jsx';
 import { getCollection } from 'astro:content';
+import '../styles/global.css'
 
 const operations = (await getCollection('operations')).sort((a, b) => a.data.order - b.data.order);
 
@@ -40,19 +41,13 @@ const timeline = [
 <BaseLayout title="Home">
   <!-- HERO -->
   <section class="hero">
-    <div class="wrap hero__grid">
-      <div class="hero__copy">
-        <p class="eyebrow">Virtual exhibit · component 3 of the processor</p>
-        <h1>The Arithmetic Logic Unit</h1>
-        <p class="hero__lede">
-          Every add, compare, and bitwise decision a computer makes passes through one small
-          circuit. This exhibit opens up the ALU — the block that turns two binary numbers and an
-          opcode into a result and a set of flags — and lets you operate one yourself.
-        </p>
-      </div>
-      <div class="hero__diagram">
-        <AluSchematic />
-      </div>
+    <div class="wrap hero__content">
+      <span class="hero__badge">COMPUTER ARCHITECTURE - INTERACTIVE EXHIBIT</span>
+      <h1>Arithmetic Logic Unit</h1>
+      <p class="hero__lede">
+        The brain of the CPU. Explore how computers perform arithmetic and logic operations using binary — and simulate it yourself.
+      </p>
+      <a href="#simulator" class="btn btn--primary">Launch Simulator</a>
     </div>
   </section>
 
@@ -61,30 +56,102 @@ const timeline = [
   <!-- ANATOMY -->
   <section id="anatomy" class="section">
     <div class="wrap">
-      <p class="eyebrow">01 · Anatomy</p>
-      <h2>Two operands, one opcode, one answer</h2>
-      <div class="anatomy__grid">
-        <article class="anatomy__item">
-          <h3>Operands — A &amp; B</h3>
+      <div class="section__eyebrow">
+        <span class="line"></span>
+        <span class="text">01 — WHAT IS AN ALU?</span>
+        <span class="line"></span>
+      </div>
+      
+      <div class="split-layout">
+        <div class="split-layout__text">
+          <h2>The Calculator Inside Your CPU</h2>
           <p>
-            The two binary numbers the ALU acts on. In a real CPU these arrive from registers;
-            here, you'll set them yourself with the switches below.
+            The Arithmetic Logic Unit (ALU) is a fundamental component of the Central Processing Unit (CPU). It is the circuit responsible for executing every mathematical and logical operation a computer performs.
           </p>
-        </article>
-        <article class="anatomy__item">
-          <h3>Opcode</h3>
           <p>
-            A short binary instruction from the control unit that tells the ALU which operation
-            to run — add, subtract, AND, shift, and so on.
+            Unlike how humans do arithmetic in their heads, the ALU works entirely with binary numbers — sequences of 0s and 1s. Every number, every instruction, every result is represented as a pattern of bits.
           </p>
-        </article>
-        <article class="anatomy__item">
-          <h3>Result &amp; flags</h3>
           <p>
-            The output bus carries the answer. Alongside it, four status flags — Zero, Carry,
-            Negative, Overflow — report facts about that answer the rest of the CPU can branch on.
+            The ALU receives two binary inputs (Operand A and Operand B), applies a selected operation, and produces a binary result along with status flags that help the CPU make decisions.
           </p>
-        </article>
+        </div>
+        
+        <div class="info-cards">
+          <article class="info-card">
+            <span class="dot dot--input"></span>
+            <div class="info-card__content">
+              <h3>Inputs</h3>
+              <p>Two binary operands (A and B)</p>
+            </div>
+          </article>
+          <article class="info-card">
+            <span class="dot dot--op"></span>
+            <div class="info-card__content">
+              <h3>Operation</h3>
+              <p>Selected via opcode from the control unit</p>
+            </div>
+          </article>
+          <article class="info-card">
+            <span class="dot dot--output"></span>
+            <div class="info-card__content">
+              <h3>Output</h3>
+              <p>Binary result of the operation</p>
+            </div>
+          </article>
+          <article class="info-card">
+            <span class="dot dot--flags"></span>
+            <div class="info-card__content">
+              <h3>Flags</h3>
+              <p>Zero, Carry, Overflow, Sign</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hairline" />
+
+  <section id="binary-basics" class="section">
+    <div class="wrap">
+      <div class="section__eyebrow">
+        <span class="line"></span>
+        <span class="text">02 — BINARY BASICS</span>
+        <span class="line"></span>
+      </div>
+      
+      <div class="split-layout">
+        <div class="split-layout__text">
+          <h2>Computers Think in 0s and 1s</h2>
+          <p>
+            Every piece of data in a computer — numbers, text, images, instructions — is ultimately stored and processed as binary digits (bits). A bit has only two states: 0 (off) or 1 (on).
+          </p>
+          <p>
+            In a binary number, each bit position represents a power of 2. The rightmost bit is 2⁰ (=1), the next is 2¹ (=2), then 2² (=4), and so on. To find the decimal value, add up the weights of all positions where the bit is 1.
+          </p>
+          
+          <div class="code-box">
+            <span class="code-title">0110 in binary:</span>
+            <code>0×8 + 1×4 + 1×2 + 0×1<br>= 0 + 4 + 2 + 0 = 6</code>
+          </div>
+        </div>
+        
+        <div class="binary-widget">
+          <p class="widget-header">BINARY REPRESENTATION — HOVER EACH BIT</p>
+          <div class="bits-row">
+            <div class="bit-col"><span class="weight">128</span><div class="bit on">1</div></div>
+            <div class="bit-col"><span class="weight">64</span><div class="bit off">0</div></div>
+            <div class="bit-col"><span class="weight">32</span><div class="bit on">1</div></div>
+            <div class="bit-col"><span class="weight">16</span><div class="bit on">1</div></div>
+            <div class="bit-col"><span class="weight">8</span><div class="bit off">0</div></div>
+            <div class="bit-col"><span class="weight">4</span><div class="bit on">1</div></div>
+            <div class="bit-col"><span class="weight">2</span><div class="bit on">1</div></div>
+            <div class="bit-col"><span class="weight">1</span><div class="bit off">0</div></div>
+          </div>
+          <div class="widget-result">
+            <span class="equals">= </span><span class="decimal">182</span> <span class="label">in decimal</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -94,9 +161,13 @@ const timeline = [
   <!-- OPERATIONS -->
   <section id="operations" class="section">
     <div class="wrap">
-      <p class="eyebrow">02 · Operations</p>
-      <h2>The instruction set</h2>
-      <p>Each card is a datasheet for one operation the ALU can run. Open one for its truth table and gate-level view.</p>
+      <div class="section__eyebrow">
+        <span class="line"></span>
+        <span class="text">03 — ALU OPERATIONS</span>
+        <span class="line"></span>
+      </div>
+      <h2>What the ALU Can Do</h2>
+      
       <div class="operations__grid">
         {
           operations.map((op) => (
@@ -112,44 +183,69 @@ const timeline = [
           ))
         }
       </div>
-    </div>
-  </section>
 
-  <hr class="hairline" />
-
-  <!-- SIMULATOR -->
-  <section id="simulator" class="section">
-    <div class="wrap">
-      <p class="eyebrow">03 · Try it</p>
-      <h2>Operate a 4-bit ALU</h2>
-      <p>
-        Toggle the switches for A and B, pick an operation, and watch the result and status flags
-        update live. This is exactly what the chip is doing — just slowed down to bit speed.
-      </p>
-      <ALUSimulator client:load />
-
-      <div class="simulator__divider">
-        <p class="eyebrow">Inside the ADD/SUB path</p>
-        <h3>How that carry actually gets computed</h3>
+      <div class="simulator-focus-box">
         <p>
-          When the operation above is ADD or SUB, the ALU has to add two 4-bit numbers — and that
-          means resolving a carry bit at every position. There's more than one way to wire that
-          carry chain; switch circuit styles below and watch how differently they settle.
+          <span class="highlight">This simulator focuses on ADD and SUB</span> — the two foundational arithmetic operations — and lets you explore how two different adder circuit designs process the same binary inputs.
         </p>
       </div>
-      <AdderCircuit client:visible />
     </div>
   </section>
+
   <hr class="hairline" />
 
-  <!-- ADDER CIRCUITS COMPARED -->
+  <section id="simulator" class="section">
+    <div class="wrap">
+      <div class="section__eyebrow">
+        <span class="line"></span>
+        <span class="text">04 — MINI ALU SIMULATOR</span>
+        <span class="line"></span>
+      </div>
+      <h2>4-Bit Binary Calculator</h2>
+      <p class="section__desc">
+        Toggle the bits in Operand A and Operand B. Select an operation and an adder circuit. Watch the ALU process the carries and produce a binary result.
+      </p>
+      
+      <ALUSimulator client:load />
+
+      <div class="simulator-helpers">
+        <article class="helper-card">
+          <span class="dot"></span>
+          <div class="helper-card__content">
+            <h3>Click bits</h3>
+            <p>Toggle 0 and 1 in each operand</p>
+          </div>
+        </article>
+        <article class="helper-card">
+          <span class="dot"></span>
+          <div class="helper-card__content">
+            <h3>Switch operations</h3>
+            <p>ADD uses direct inputs; SUB inverts B and adds 1 (two's complement)</p>
+          </div>
+        </article>
+        <article class="helper-card">
+          <span class="dot"></span>
+          <div class="helper-card__content">
+            <h3>Compare adders</h3>
+            <p>Switch between Ripple Carry and Carry Lookahead to see different carry paths</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <hr class="hairline" />
+
   <section id="adder-comparison" class="section">
     <div class="wrap">
-      <p class="eyebrow">04 · Adder Circuits Compared</p>
+      <div class="section__eyebrow">
+        <span class="line"></span>
+        <span class="text">05 — ADDER CIRCUITS COMPARED</span>
+        <span class="line"></span>
+      </div>
       <h2>Ripple Carry vs. Carry Lookahead</h2>
       
       <div class="comparison__grid">
-        <!-- RCA Card -->
         <div class="comparison__card">
           <div class="card__header">
             <span class="badge badge--rca">RCA</span>
@@ -165,7 +261,7 @@ const timeline = [
                 <li class="pos">Easy to implement</li>
               </ul>
             </div>
-            <div class="list__group">
+            <div class="list__group trade-offs">
               <h4>Trade-offs</h4>
               <ul>
                 <li class="neg">Slow — each carry must ripple forward</li>
@@ -175,7 +271,6 @@ const timeline = [
           </div>
         </div>
 
-        <!-- CLA Card -->
         <div class="comparison__card">
           <div class="card__header">
             <span class="badge badge--cla">CLA</span>
@@ -191,7 +286,7 @@ const timeline = [
                 <li class="pos">Used in real CPUs</li>
               </ul>
             </div>
-            <div class="list__group">
+            <div class="list__group trade-offs">
               <h4>Trade-offs</h4>
               <ul>
                 <li class="neg">More complex circuitry</li>
@@ -203,7 +298,6 @@ const timeline = [
         </div>
       </div>
 
-      <!-- SUBTRACTION PANEL -->
       <div class="subtraction__panel">
         <h3>How Subtraction Works: Two's Complement</h3>
         <p>Instead of building a separate subtraction circuit, the ALU reuses the adder. To compute A − B, it calculates A + (−B). In binary, the negative of a number is its <strong>two's complement</strong>: flip all bits (~B), then add 1.</p>
@@ -233,405 +327,104 @@ const timeline = [
   <!-- HISTORY -->
   <section id="history" class="section">
     <div class="wrap">
-      <p class="eyebrow">05 · How it got here</p>
-      <h2>From relays to silicon</h2>
-      <ol class="timeline">
+      <div class="section__eyebrow">
+        <span class="line"></span>
+        <span class="text">06 — HOW IT GOT HERE</span>
+        <span class="line"></span>
+      </div>
+      
+      <h2>From Relays to Silicon</h2>
+      
+      <div class="timeline__container">
         {
           timeline.map((entry) => (
-            <li class="timeline__item">
-              <span class="timeline__year mono-value">{entry.year}</span>
-              <div>
-                <h3 class="timeline__title">{entry.title}</h3>
-                <p>{entry.body}</p>
+            <div class="timeline__card">
+              <div class="timeline__header">
+                <span class="timeline__year mono-value">{entry.year}</span>
+                <h3>{entry.title}</h3>
               </div>
-            </li>
+              <p class="timeline__body">{entry.body}</p>
+            </div>
           ))
         }
-      </ol>
+      </div>
     </div>
   </section>
 
-<hr class="hairline" />
+  <hr class="hairline" />
 
-  <!-- TECH STACK -->
   <section id="tech-stack" class="section">
-    <div class="wrap tech-stack__grid">
-      
-      <!-- Left Column -->
-      <div class="tech-stack__info">
-        <p class="eyebrow">06 · Tech Stack</p>
-        <h2>How This Exhibit Is Built</h2>
-        <p class="tech-stack__lede">
-          The exhibit is built as a static site using Astro 6, with MDX for content authoring and React JSX for the interactive ALU Simulator component. Styling uses CSS with Astro scoped styles, and all assets are served as PNG images from a GitHub repository.
-        </p>
+    <div class="wrap">
+      <div class="section__eyebrow">
+        <span class="line"></span>
+        <span class="text">07 — TECH STACK</span>
+        <span class="line"></span>
+      </div>
+      <div class="tech-stack__grid">
+        <div class="tech-stack__info">
+          <h2>How This Exhibit Is Built</h2>
+          <p class="tech-stack__lede">
+            The exhibit is built as a static site using Astro 6, with MDX for content authoring and React JSX for the interactive ALU Simulator component. Styling uses CSS with Astro scoped styles, and all assets are served as PNG images from a GitHub repository.
+          </p>
 
-        <!-- Nested Plan Box -->
-        <div class="stack-plan__box">
-          <div class="stack-plan__header">
-            <span class="drag-handle">::</span> Tech Stack Plan:
+          <div class="stack-plan__box">
+            <div class="stack-plan__header">
+              <span class="drag-handle">::</span> Tech Stack Plan:
+            </div>
+            <table class="stack-plan__table">
+              <thead>
+                <tr>
+                  <th>Part</th>
+                  <th>Plan</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Main framework</td><td>Astro 6</td></tr>
+                <tr><td>Runtime</td><td class="text-link">Node.js 26</td></tr>
+                <tr><td>Content</td><td>MDX</td></tr>
+                <tr><td>Interactive component</td><td>React JSX</td></tr>
+                <tr><td>Styling</td><td>CSS / Astro scoped styles</td></tr>
+                <tr><td>Assets</td><td>PNG</td></tr>
+                <tr><td>Repository</td><td>GitHub</td></tr>
+              </tbody>
+            </table>
           </div>
-          <table class="stack-plan__table">
-            <thead>
-              <tr>
-                <th>Part</th>
-                <th>Plan</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr><td>Main framework</td><td>Astro 6</td></tr>
-              <tr><td>Runtime</td><td class="text-link">Node.js 26</td></tr>
-              <tr><td>Content</td><td>MDX</td></tr>
-              <tr><td>Interactive component</td><td>React JSX</td></tr>
-              <tr><td>Styling</td><td>CSS / Astro scoped styles</td></tr>
-              <tr><td>Assets</td><td>PNG</td></tr>
-              <tr><td>Repository</td><td>GitHub</td></tr>
-            </tbody>
-          </table>
+        </div>
+
+        <div class="tech-stack__pills">
+          <div class="stack-pill">
+            <span class="pill__label">Main framework</span>
+            <span class="pill__value text-green">Astro 6</span>
+          </div>
+          <div class="stack-pill">
+            <span class="pill__label">Runtime</span>
+            <span class="pill__value text-green">Node.js 26</span>
+          </div>
+          <div class="stack-pill">
+            <span class="pill__label">Content</span>
+            <span class="pill__value text-green">MDX</span>
+          </div>
+          <div class="stack-pill">
+            <span class="pill__label">Interactive component</span>
+            <span class="pill__value text-green">React JSX</span>
+          </div>
+          <div class="stack-pill">
+            <span class="pill__label">Styling</span>
+            <span class="pill__value text-green">CSS / Astro scoped styles</span>
+          </div>
+          <div class="stack-pill">
+            <span class="pill__label">Assets</span>
+            <span class="pill__value text-green">PNG</span>
+          </div>
+          <div class="stack-pill">
+            <span class="pill__label">Repository</span>
+            <span class="pill__value text-green">GitHub</span>
+          </div>
         </div>
       </div>
-
-      <!-- Right Column -->
-      <div class="tech-stack__pills">
-        <div class="stack-pill">
-          <span class="pill__label">Main framework</span>
-          <span class="pill__value text-green">Astro 6</span>
-        </div>
-        <div class="stack-pill">
-          <span class="pill__label">Runtime</span>
-          <span class="pill__value text-green">Node.js 26</span>
-        </div>
-        <div class="stack-pill">
-          <span class="pill__label">Content</span>
-          <span class="pill__value text-green">MDX</span>
-        </div>
-        <div class="stack-pill">
-          <span class="pill__label">Interactive component</span>
-          <span class="pill__value text-green">React JSX</span>
-        </div>
-        <div class="stack-pill">
-          <span class="pill__label">Styling</span>
-          <span class="pill__value text-green">CSS / Astro scoped styles</span>
-        </div>
-        <div class="stack-pill">
-          <span class="pill__label">Assets</span>
-          <span class="pill__value text-green">PNG</span>
-        </div>
-        <div class="stack-pill">
-          <span class="pill__label">Repository</span>
-          <span class="pill__value text-green">GitHub</span>
-        </div>
-      </div>
-
     </div>
   </section>
 
+  <hr class="hairline" />
 
-  <style>
-    .hero {
-      padding-block: clamp(3rem, 8vw, 6rem) 3rem;
-    }
-    .hero__grid {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: clamp(2rem, 5vw, 4rem);
-      align-items: center;
-    }
-    .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.4rem);
-    }
-    .hero__lede {
-      color: var(--paper-dim);
-      font-size: 1.05rem;
-    }
-    .hero__diagram {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: var(--panel);
-      padding: 1.5rem;
-    }
-    @media (max-width: 860px) {
-      .hero__grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .section {
-      padding-block: clamp(3rem, 6vw, 5rem);
-    }
-    .section h2 {
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      max-width: 40ch;
-    }
-
-    .simulator__divider {
-      margin-top: 3rem;
-      padding-top: 2rem;
-      border-top: 1px solid var(--border);
-    }
-    .simulator__divider h3 {
-      font-size: 1.1rem;
-      margin-top: 0.4rem;
-    }
-    .simulator__divider p {
-      color: var(--paper-dim);
-      font-size: 0.92rem;
-    }
-
-    .anatomy__grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .anatomy__item {
-      border-top: 2px solid var(--trace-dim);
-      padding-top: 0.9rem;
-    }
-    .anatomy__item h3 {
-      font-size: 1rem;
-    }
-    .anatomy__item p {
-      color: var(--paper-dim);
-      font-size: 0.92rem;
-    }
-
-    .operations__grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 1.25rem;
-      margin-top: 2rem;
-    }
-
-    .timeline {
-      list-style: none;
-      margin: 2rem 0 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 1.75rem;
-    }
-    .timeline__item {
-      display: grid;
-      grid-template-columns: 7rem 1fr;
-      gap: 1.25rem;
-      padding-top: 1.25rem;
-      border-top: 1px solid var(--border);
-    }
-    .timeline__item:first-child {
-      border-top: none;
-      padding-top: 0;
-    }
-    .timeline__year {
-      color: var(--trace);
-      font-size: 0.85rem;
-    }
-    .timeline__title {
-      font-size: 1rem;
-      margin-bottom: 0.35rem;
-    }
-    .timeline p {
-      color: var(--paper-dim);
-      font-size: 0.92rem;
-    }
-    @media (max-width: 560px) {
-      .timeline__item {
-        grid-template-columns: 1fr;
-        gap: 0.4rem;
-      }
-    }
-    .comparison__grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
-      margin-top: 2rem;
-    }
-    .comparison__card {
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
-    }
-    .card__header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
-    }
-    .badge {
-      font-size: 0.75rem;
-      font-weight: bold;
-      padding: 0.2rem 0.5rem;
-      border-radius: 4px;
-    }
-    .badge--rca { background: rgba(0, 150, 136, 0.2); color: #009688; }
-    .badge--cla { background: rgba(255, 111, 0, 0.2); color: #ff6f00; }
-    
-    .card__desc {
-      color: var(--paper-dim);
-      font-size: 0.95rem;
-      margin-bottom: 1.5rem;
-      line-height: 1.5;
-    }
-    .card__lists {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1rem;
-    }
-    .list__group h4 {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 0.5rem;
-    }
-    .list__group :global(h4:nth-of-type(1)) { color: #009688; } /* Advantages header color */
-    .list__group :global(.trade-offs h4) { color: #ff6f00; } /* Trade-offs header color */
-    
-    .list__group ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-    }
-    .list__group li.pos::before { content: "✓ "; color: #009688; margin-right: 0.25rem; }
-    .list__group li.neg::before { content: "– "; color: #ff6f00; margin-right: 0.25rem; }
-
-    /* SUBTRACTION PANEL */
-    .subtraction__panel {
-      margin-top: 2rem;
-      background: rgba(var(--panel-rgb), 0.5); /* slightly distinct panel background */
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
-    }
-    .subtraction__panel h3 {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
-    .subtraction__panel p {
-      color: var(--paper-dim);
-      font-size: 0.95rem;
-      line-height: 1.6;
-    }
-    .steps__grid {
-      background: #07111e; /* matching dark inner shell */
-      border-radius: 6px;
-      padding: 1.25rem;
-      margin-block: 1.5rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-    }
-    .step__item {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-    }
-    .step__label {
-      font-size: 0.8rem;
-      color: #52667d;
-    }
-    .step__val {
-      font-weight: bold;
-      font-size: 0.95rem;
-    }
-    .text-blue { color: #38bdf8; }
-    .text-orange { color: #fb923c; }
-    .text-green { color: #4ade80; }
-    .subtraction__footer {
-      font-style: italic;
-    }
-    .tech-stack__grid {
-      display: grid;
-      grid-template-columns: 1.2fr 1fr;
-      gap: 3rem;
-      align-items: start;
-      margin-top: 2rem;
-    }
-    .tech-stack__info h2 {
-      margin-bottom: 1rem;
-    }
-    .tech-stack__lede {
-      color: #708198;
-      font-size: 1.05rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
-    }
-
-    /* LEFT EMBEDDED BOX */
-    .stack-plan__box {
-      background: #04090f;
-      border: 1px solid #101f30;
-      border-radius: 8px;
-      padding: 1.25rem;
-      font-family: monospace;
-      font-size: 0.85rem;
-    }
-    .stack-plan__header {
-      color: #8b9bb4;
-      margin-bottom: 0.75rem;
-      font-weight: bold;
-    }
-    .drag-handle {
-      color: #384a62;
-      margin-right: 0.25rem;
-    }
-    .stack-plan__table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
-    .stack-plan__table th, 
-    .stack-plan__table td {
-      border: 1px solid #162a3f;
-      padding: 0.5rem 0.75rem;
-      color: #8b9bb4;
-    }
-    .stack-plan__table th {
-      color: #ffffff;
-      font-weight: 600;
-    }
-    .stack-plan__table td.text-link {
-      color: #00a8ff;
-      text-decoration: underline;
-    }
-
-    /* RIGHT PILL PIECES */
-    .tech-stack__pills {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    .stack-pill {
-      background: rgba(16, 31, 48, 0.4);
-      border: 1px solid #101f30;
-      border-radius: 6px;
-      padding: 1rem 1.25rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .pill__label {
-      color: #8b9bb4;
-      font-size: 0.95rem;
-    }
-    .pill__value {
-      font-family: monospace;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-    .pill__value.text-green {
-      color: #00ffcc; /* Vibrant Figma neon accent cyan/green */
-    }
-
-    /* RESPONSIVE FALLBACK */
-    @media (max-width: 860px) {
-      .tech-stack__grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-      }
-    }
-  </style>
 </BaseLayout>
