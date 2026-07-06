@@ -10,14 +10,18 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout your repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
       - name: Install, build, and upload your site
-        uses: withastro/action@v6
+        uses: withastro/action@v4
 
   deploy:
     needs: build
