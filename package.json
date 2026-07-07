@@ -10,7 +10,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "sync": "astro sync"
+    "sync": "astro sync",
+    "vercel-build": "chmod +x ./node_modules/.bin/astro && astro build",
+    "preview": "astro preview",
+    "start": "astro dev"
   },
   "dependencies": {
     "@astrojs/mdx": "^6.0.0",
@@ -19,4 +22,5 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   }
+  
 }
