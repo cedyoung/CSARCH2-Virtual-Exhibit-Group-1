@@ -7,9 +7,10 @@ category: arithmetic
 summary: Binary addition with carry-out, built from a chain of full adders.
 flagsAffected: [Z, C, N, V]
 order: 1
+scope: core
 ---
 
-import AdderCircuit from '../../components/AdderCircuit.jsx';
+import S04_Group1_AdderCircuit from '../../components/S04_Group1_AdderCircuit.jsx';
 
 Addition is the operation the rest of the ALU is often built around — a subtractor is usually
 just an adder fed an inverted second operand. A 4-bit adder is four **full adders** chained
@@ -41,7 +42,7 @@ roughly sixteen times slower than a 4-bit one.
 
 **Carry-lookahead adder.** Instead of waiting on its neighbor, every stage computes two signals
 up front — **generate** (`G = A · B`, "this stage makes a carry no matter what") and
-**propagate** (`P = A ⊕ B`, "this stage passes a carry through if one arrives"). A separate block
+**propagate** (`P = A OR B`, "this stage passes a carry through if one arrives"). A separate block
 of gates combines *all* the G and P signals directly against the carry-in to produce every carry
 bit in parallel, in a fixed number of gate delays no matter how wide the adder is. The trade is
 more gates and more wiring for that flat delay.
@@ -49,7 +50,7 @@ more gates and more wiring for that flat delay.
 Switch between the two below and watch the carry chain settle — ripple-carry lights up one node
 at a time, left to right; carry-lookahead lights the whole chain up in a single step.
 
-<AdderCircuit client:visible />
+<S04_Group1_AdderCircuit client:visible />
 
 ## Reading the flags
 

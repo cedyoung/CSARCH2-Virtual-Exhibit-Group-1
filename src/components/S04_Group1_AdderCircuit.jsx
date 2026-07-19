@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { computeAdderTrace } from '../lib/S04_Group1_aluEngine.js';
 
 const WIDTH = 4;
 const STAGE_DELAY_MS = 260; // per-stage highlight delay used only for the ripple animation
@@ -9,18 +10,11 @@ function bitsToInt(bits) {
 }
 
 /** Generate/propagate signals and every carry in the chain, computed however the caller likes. */
-function computeCarryChain(aBits, bBits, cin) {
-  const g = aBits.map((a, i) => a & bBits[i]); // generate: this stage makes a carry on its own
-  const p = aBits.map((a, i) => a ^ bBits[i]); // propagate: this stage passes a carry through
-
-  // c[0] is the carry-in; c[1..WIDTH] are the carries out of each stage.
-  const c = [cin];
-  for (let i = 0; i < WIDTH; i++) {
-    c.push(g[i] | (p[i] & c[i]));
-  }
-
-  const sum = p.map((pi, i) => pi ^ c[i]);
-  return { g, p, c, sum };
+function computeCarryChain(aBits, bBits, cin, mode) {
+  const a = [...aBits].reverse().join('');
+  const b = [...bBits].reverse().join('');
+  const trace = computeAdderTrace(a, b, cin, mode === 'lookahead' ? 'CLA' : 'RCA');
+  return { g: trace.generate, p: trace.propagate, c: trace.carries, sum: trace.sumBits };
 }
 
 function BitSwitch({ bit, index, onToggle, label }) {
@@ -38,7 +32,7 @@ function BitSwitch({ bit, index, onToggle, label }) {
   );
 }
 
-export default function AdderCircuit() {
+export default function S04_Group1_AdderCircuit() {
   const [aBits, setABits] = useState([1, 0, 1, 0]); // LSB → MSB: A = 0101 = 5
   const [bBits, setBBits] = useState([1, 1, 0, 0]); // B = 0011 = 3
   const [cin, setCin] = useState(0);
@@ -46,7 +40,7 @@ export default function AdderCircuit() {
   const [activeStage, setActiveStage] = useState(-1); // -1 = idle, WIDTH = fully settled
   const timeouts = useRef([]);
 
-  const { g, p, c, sum } = useMemo(() => computeCarryChain(aBits, bBits, cin), [aBits, bBits, cin]);
+  const { g, p, c, sum } = useMemo(() => computeCarryChain(aBits, bBits, cin, mode), [aBits, bBits, cin, mode]);
 
   const aValue = bitsToInt(aBits);
   const bValue = bitsToInt(bBits);
@@ -117,6 +111,7 @@ export default function AdderCircuit() {
             type="button"
             className="adder__modebtn"
             data-active={mode === 'ripple'}
+            aria-pressed={mode === 'ripple'}
             onClick={() => setMode('ripple')}
           >
             Ripple-carry
@@ -125,6 +120,7 @@ export default function AdderCircuit() {
             type="button"
             className="adder__modebtn"
             data-active={mode === 'lookahead'}
+            aria-pressed={mode === 'lookahead'}
             onClick={() => setMode('lookahead')}
           >
             Carry-lookahead
@@ -182,9 +178,11 @@ export default function AdderCircuit() {
       </div>
 
       <style>{`
+        .S04_Group1_exhibit {
         .adder {
           display: flex;
           flex-direction: column;
+          container-type: inline-size;
           gap: 1.5rem;
           padding: 1.5rem;
           background: var(--panel);
@@ -347,6 +345,12 @@ export default function AdderCircuit() {
           .adder__mode {
             margin-left: 0;
           }
+        }
+        @container (max-width: 640px) {
+          .adder__mode {
+            margin-left: 0;
+          }
+        }
         }
       `}</style>
     </div>

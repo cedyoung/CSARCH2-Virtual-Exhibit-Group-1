@@ -1,0 +1,48 @@
+---
+/* Shared professor-template museum homepage layout. */
+import 'normalize.css';
+import '@fontsource-variable/lora';
+import '@fontsource-variable/noto-sans';
+import '../styles/global.css';
+
+const { title = 'CSARCH2 Virtual Exhibit' } = Astro.props.frontmatter ?? Astro.props;
+const pageModules = import.meta.glob('../pages/*.mdx', { eager: true }) as Record<string, any>;
+const exhibits = Object.entries(pageModules)
+  .filter(([path]) => !path.endsWith('/index.mdx'))
+  .map(([, exhibit]) => exhibit);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <hgroup class="titleheading">
+      <h1 class="title">ArchCities Virtual Exhibit</h1>
+      <div class="subtitle">Computer Architecture is Forever</div>
+    </hgroup>
+    <main class="content">
+      <nav class="toc" aria-label="Exhibits">
+        <h2>Exhibits</h2>
+        <ul class="toc__list">
+          {exhibits.map((exhibit) => (
+            <li class="toc__item" style="margin-bottom: 1rem;">
+              <a href={exhibit.url} style="font-weight: 500;">
+                {exhibit.frontmatter.title || 'Untitled Exhibit'}
+              </a>
+              {exhibit.frontmatter.author && (
+                <span style="display: block; font-size: 0.8rem; color: var(--muted);">
+                  by {exhibit.frontmatter.author}
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </main>
+    <footer>CSARCH2 Virtual Exhibit &mdash; "Computer Architecture is Forever"</footer>
+  </body>
+</html>
