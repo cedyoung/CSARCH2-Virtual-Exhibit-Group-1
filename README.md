@@ -1,84 +1,94 @@
-# CSARCH2 Virtual Exhibit — Group 1
+# CSARCH2-Virtual-Exhibit-Group-1
 
-## Inside the ALU: How Computers Perform Arithmetic and Logic Operations
+## Title: Inside the ALU: How Computers Perform Arithmetic and Logic Operations
 
-### Members
+**Members:**
+- Member 1: Corral, Matthew
+- Member 2: De Castro, Jediaelle Denise
+- Member 3: Del Mundo, Joshua
+- Member 4: Fabricante, Jeruel
+- Member 5: Young, Cedric
 
-- Corral, Matthew
-- De Castro, Jediaelle Denise
-- Del Mundo, Joshua
-- Fabricante, Jeruel
-- Young, Cedric
+## Topic Theme:
+The exhibit teaches how computers perform calculations — specifically that computers do not think the way humans do. Humans calculate abstractly; computers process everything as binary (0s and 1s) through physical circuits. The ALU is the component inside every CPU that does this work.
 
-## Topic theme
+## The exhibit walks through five conceptual layers:
 
-The exhibit explains that computers perform arithmetic and logic through physical binary circuits. It moves from binary representation to ALU inputs, operations, status flags, two's-complement subtraction, and the carry circuits that make addition possible.
+1. What the ALU is — a dedicated circuit inside the CPU that receives two binary inputs, applies an operation selected by the control unit, and outputs a binary result plus status flags (Zero, Carry, Overflow, Sign) that help the CPU make decisions like branching.
 
-The six proposal operations remain clearly identifiable: ADD, SUB, AND, OR, XOR, and NOT. The completed exhibit also retains SHL and SHR as advanced operations, giving all eight Mini ALU selections their own conceptual card and detail route.
+2. Binary representation — how numbers are encoded as bit patterns where each position carries a power-of-2 weight, so the human number 6 becomes 0110 in a 4-bit system.
 
-## Tech stack plan
+3. The full operation set — ADD, SUB, AND, OR, XOR, NOT. The exhibit covers all six conceptually but focuses the simulator on the two arithmetic ones (ADD and SUB) because they involve the most interesting internal circuit behavior.
 
-| Part | Implementation |
-| --- | --- |
-| Main framework | Astro static site; tested on Astro 6 and template Astro 5.18 |
-| Runtime | Node.js 26.x |
-| Content | MDX and an Astro content collection |
-| Interactive components | React JSX islands compatible with React 18 and 19 |
-| Arithmetic | Shared pure JavaScript engine using BigInt |
-| Styling | Dark technical design with namespaced responsive CSS |
-| Repository and deployment | GitHub with GitHub Pages CI |
+4. Adder circuit design — the heart of the exhibit. Two real circuit architectures are compared: Ripple Carry and Carry Lookahead (explained below).
 
-## Interactive element
+5. Two's complement subtraction — how the ALU reuses its adder circuit to subtract by inverting B's bits and injecting a carry-in of 1, instead of needing a separate subtraction circuit.
 
-The unified Mini ALU accepts binary Operand A and Operand B values up to 64 bits. Visitors can type values or toggle each visible bit with the keyboard or pointer, choose Auto/4/8/16/32/64-bit width, and run ADD, SUB, AND, OR, XOR, NOT, SHL, or SHR. Decimal, hexadecimal, binary result, and Z/C/N/V flags update live. Unary operations clearly disable Operand B.
+The exhibit includes an interactive calculator called the **Mini ALU Simulator**, where users can enter numbers, choose an operation, and see how the ALU processes the result in binary form.
 
-For ADD and SUB, visitors select either Ripple Carry Adder (RCA) or Carry Lookahead Adder (CLA). The simulator exposes effective B, `C0`, bit positions, Generate, Propagate, carry-in/out, sum bits, and the derivation used by the selected architecture. The proposal definitions are preserved: `G = A AND B-effective` and `P = A OR B-effective`; sum uses XOR.
 
-RCA computes `Ci+1 = Gi OR (Pi AND Ci)` stage by stage. CLA expands each carry directly from G/P and `C0`, independently of the ripple chain. Both architectures therefore produce identical numbers while illustrating different circuit timing and complexity.
+**Tech Stack Plan:**
+| Part | Plan |
+| ---- | ---- |
+| Main framework | Astro 6 |
+| Runtime | Node.js 26 |
+| Content | MDX |
+| Interactive component | React JSX |
+| Styling | CSS / Astro scoped styles |
+| Assets | PNG |
+| Repository | GitHub |
 
-The separate Ripple Carry Adder Lab accepts up to 64 bits and an optional carry-in. It shows the full result, decimal check, LSB-first stage chain, calculation table, and a replayable animation that respects reduced-motion settings.
+## Proposed Interactive Element:
+**Inputs**
+Operand A and Operand B — each is a 4-bit binary number. Users click individual bit buttons to toggle them between 0 and 1. The decimal value updates live so users can see the connection between binary patterns and real numbers.
 
-## Simulator flow
+**Operation Selector**
+ADD — passes A and B directly into the adder with carry-in = 0.
+SUB — automatically inverts every bit of B (shown as ~B in the display) and sets carry-in = 1, performing two's complement subtraction through the same adder hardware.
 
-1. Enter nonempty binary operands, preserving any meaningful leading zeros.
-2. Choose Auto or a fixed word width up to 64 bits.
-3. Select one of eight ALU operations.
-4. For ADD/SUB, compare RCA and CLA carry derivations.
-5. Inspect effective B, per-bit G/P/carry/sum values, masked result, full carry, number formats, flags, and warnings.
+**Adder Mode Selector**
+This is the exhibit's key educational differentiator — two real circuit strategies:
 
-## Reading the flags correctly
+**Carry Lookahead Adder (CLA)** — computes all carries simultaneously before any sum bits are calculated. It uses two pre-computed signals per bit: Generate (G = A AND B), meaning this bit will always produce a carry regardless of input carry, and Propagate (P = A OR B), meaning this bit will pass a carry through if one arrives. From G and P, all four carry values are derived in parallel using boolean formulas. The simulator exposes the G and P table so users can see these signals. Faster, but more complex circuitry.
 
-- `Z` is set when the masked result is zero.
-- `N` mirrors the selected word's most-significant result bit.
-- For ADD, `C` reports unsigned carry overflow; `V` separately reports signed overflow.
-- For SUB, `C` means no borrow. A set SUB Carry is not an overflow warning; `V` still reports signed overflow independently.
+**Output**
+- A step view table showing A, the effective B (inverted if SUB), the carry-in values per bit position, and the resulting SUM bits — laid out the same way a hardware engineer would trace a circuit
+- The binary result displayed as four lit bit cells
+- The decimal equivalent of the result
+- An overflow warning if the carry-out bit fires, indicating the true result exceeds the 4-bit range
 
-## Development and deployment
 
-Use Node.js 26.x, matching the repository declaration and GitHub Actions:
+**Simulator Flow**
+- User enters Operand A and Operand B as 4-bit binary values
+- User selects an operation ADD or SUB
+- User selects an adder mode Ripple carry adder or Carry lookahead adder
+- The simulator displays the carry values, binary result and decimal equivalent
 
-```bash
-npm ci
-npm test
-npm run check
-npm run build
-```
 
-The museum root automatically lists the top-level `src/pages/S04_Group1.mdx` entry at `/S04_Group1/`. Operation details live at `/S04_Group1/operations/{slug}/`. The Group 1 page uses the professor's shared exhibit layout and loads its own namespaced shell and stylesheet. `SITE_URL` and `BASE_PATH` may override the GitHub Pages defaults. CI publishes a fresh `dist/` artifact, while `node_modules/`, `.astro/`, and `dist/` remain ignored.
+**Description**
+This revised proposal gives the Mini ALU Simulator a clearer and more realistic scope. Instead of attempting to cover many ALU operations vaguely, the exhibit will focus on addition and subtraction only. For both operations, users will be able to compare how a Ripple Carry Adder and a Carry Lookahead Adder process the same 4-bit inputs.
 
-For the professor-template merge, copy only `S04_Group1_*` components, the Group 1 content directory, arithmetic engine, top-level exhibit page, nested operation route, group stylesheet, and tests. Merge the `S04_Group1_operations` collection registration with other groups; do not overwrite the professor's root page, layouts, global stylesheet, package files, Astro configuration, lockfile, or deployment workflow.
+## Snapshot of Layout Design:
+<img width="1917" height="726" alt="image" src="https://github.com/user-attachments/assets/e0e14c45-4b94-47c8-af5d-bccecf8cd9b6" />
+<img width="1917" height="651" alt="image" src="https://github.com/user-attachments/assets/cd3107d8-32b7-4d63-a9e0-f1a2df854717" />
+<img width="1917" height="722" alt="image" src="https://github.com/user-attachments/assets/17e2f232-39a5-4c71-886a-a294b14877ff" />
+<img width="1917" height="762" alt="image" src="https://github.com/user-attachments/assets/22118a75-b0da-4735-85c0-5d567328db08" />
+<img width="1917" height="742" alt="image" src="https://github.com/user-attachments/assets/4bfe8a72-cce7-40a8-89dd-a1a247052cdc" />
+<img width="1917" height="682" alt="image" src="https://github.com/user-attachments/assets/a4d023cb-397b-43fb-9342-1556ec1c1987" />
+<img width="1917" height="161" alt="image" src="https://github.com/user-attachments/assets/025f3011-a2d9-49af-b956-d602c0cf99b5" />
+<img width="1911" height="752" alt="image" src="https://github.com/user-attachments/assets/23baf5c1-69d0-4802-bacc-c741a4fce63d" />
+<img width="1917" height="267" alt="image" src="https://github.com/user-attachments/assets/f8aaedeb-f6d8-47c3-89eb-be4cd01a3761" />
+<img width="1917" height="747" alt="image" src="https://github.com/user-attachments/assets/a9731648-8b5e-4763-9bda-def2a2d92ecf" />
 
-## Snapshot of layout design
+## Disclosure on the Use of AI/LLM
 
-<img width="1917" height="726" alt="ALU exhibit hero" src="https://github.com/user-attachments/assets/e0e14c45-4b94-47c8-af5d-bccecf8cd9b6" />
-<img width="1917" height="651" alt="ALU exhibit overview" src="https://github.com/user-attachments/assets/cd3107d8-32b7-4d63-a9e0-f1a2df854717" />
-<img width="1917" height="722" alt="Binary basics section" src="https://github.com/user-attachments/assets/17e2f232-39a5-4c71-886a-a294b14877ff" />
-<img width="1917" height="762" alt="ALU operation cards" src="https://github.com/user-attachments/assets/22118a75-b0da-4735-85c0-5d567328db08" />
-<img width="1917" height="742" alt="Mini ALU simulator" src="https://github.com/user-attachments/assets/4bfe8a72-cce7-40a8-89dd-a1a247052cdc" />
-<img width="1917" height="682" alt="Adder comparison" src="https://github.com/user-attachments/assets/a4d023cb-397b-43fb-9342-1556ec1c1987" />
-<img width="1917" height="161" alt="Exhibit divider" src="https://github.com/user-attachments/assets/025f3011-a2d9-49af-b956-d602c0cf99b5" />
-<img width="1911" height="752" alt="ALU history" src="https://github.com/user-attachments/assets/23baf5c1-69d0-4802-bacc-c741a4fce63d" />
-<img width="1917" height="267" alt="Tech stack section" src="https://github.com/user-attachments/assets/f8aaedeb-f6d8-47c3-89eb-be4cd01a3761" />
-<img width="1917" height="747" alt="Exhibit footer" src="https://github.com/user-attachments/assets/a9731648-8b5e-4763-9bda-def2a2d92ecf" />
+Artificial Intelligence (AI) tools being used in the making of this project are **ChatGPT**, **Google Gemini** and **ClaudeAI**. The role of these AI tools in this project is they assist the members in productivity and act as a tool for learning and clarifying concepts. 
 
-[Figma design](https://www.figma.com/make/GDR34ZTPlb8ET8viaV19dM/Mini-ALU-Simulator?t=o8ehtl5ZBDA8LAcR-1)
+AI Tools are used for the following purposes: 
+- Clarifying the concepts of Astro, MDX and React JSX and how to apply them properly in the project. 
+- Explaining the ideas related to the concept of the Arithmetic Logic Unit. 
+- Clarify how can Astro, MDX and React JSX can interact with one another in the code. 
+
+All AI-generated suggestions were analyzed and reviewed prior to its utilization in the project. The project's final implementation, processes, design, deliverables and debugging were all taken care of and integrated by the members of this group. 
+
+Link to Figma: https://www.figma.com/make/GDR34ZTPlb8ET8viaV19dM/Mini-ALU-Simulator?t=o8ehtl5ZBDA8LAcR-1
