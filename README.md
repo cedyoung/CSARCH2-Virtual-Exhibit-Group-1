@@ -215,12 +215,13 @@ For the professor-template merge, copy only `S04_Group1_*` components, the Group
 
 ## Disclosure on the Use of AI/LLM
 
-Artificial Intelligence (AI) tools being used in the making of this project are **ChatGPT**, **Google Gemini** and **ClaudeAI**. The role of these AI tools in this project is they assist the members in productivity and act as a tool for learning and clarifying concepts. 
+Artificial Intelligence (AI) tools being used in the making of this project are **ChatGPT**, **Google Gemini**, **Figma Make** and **ClaudeAI**. The role of these AI tools in this project is they assist the members in productivity and act as a tool for learning and clarifying concepts. 
 
 AI Tools are used for the following purposes: 
 - Clarifying the concepts of Astro, MDX and React JSX and how to apply them properly in the project. 
 - Explaining the ideas related to the concept of the Arithmetic Logic Unit. 
-- Clarify how can Astro, MDX and React JSX can interact with one another in the code. 
+- Clarify how can Astro, MDX and React JSX can interact with one another in the code.
+- To check if the math is correct and validated.
 
 All AI-generated suggestions were analyzed and reviewed prior to its utilization in the project. The project's final implementation, processes, design, deliverables and debugging were all taken care of and integrated by the members of this group. 
 
