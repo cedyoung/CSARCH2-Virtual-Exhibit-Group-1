@@ -177,6 +177,71 @@ html:has(.S04_Group1_exhibit) {
   padding-block: 1.5rem;
 }
 
+/* Reference citations */
+.S04_Group1_exhibit .references__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.S04_Group1_exhibit .references__item {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+}
+
+.S04_Group1_exhibit .references__number {
+  color: var(--trace);
+  font-size: 0.8rem;
+}
+
+.S04_Group1_exhibit .references__item cite {
+  display: block;
+  margin-bottom: 0.65rem;
+  color: var(--paper);
+  font-family: var(--font-mono);
+  font-style: normal;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.S04_Group1_exhibit .references__item p {
+  margin-bottom: 0.85rem;
+  font-size: 0.9rem;
+}
+
+.S04_Group1_exhibit .references__item a {
+  font-family: var(--font-label);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.S04_Group1_exhibit .references__item a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+@media (max-width: 720px) {
+  .S04_Group1_exhibit .references__list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@container exhibit (max-width: 720px) {
+  .S04_Group1_exhibit .references__list {
+    grid-template-columns: 1fr;
+  }
+}
+
 .S04_Group1_exhibit .header__inner {
   display: flex;
   align-items: center;
