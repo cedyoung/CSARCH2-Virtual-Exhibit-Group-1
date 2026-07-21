@@ -11,6 +11,7 @@ import S04_Group1_ALUSimulator from '../components/S04_Group1_ALUSimulator.jsx';
 import S04_Group1_OperationsGrid from '../components/S04_Group1_OperationsGrid.astro';
 import S04_Group1_RippleCarryAdderSimulator from '../components/S04_Group1_RippleCarryAdderSimulator.jsx';
 import S04_Group1_AluSchematic from '../components/S04_Group1_AluSchematic.astro';
+import S04_Group1_BinaryWidget from '../components/S04_Group1_BinaryWidget.jsx';
 
 <S04_Group1_ExhibitShell>
 
@@ -100,18 +101,7 @@ import S04_Group1_AluSchematic from '../components/S04_Group1_AluSchematic.astro
         </div>
       </div>
 
-      <div className="binary-widget">
-        <p className="widget-header">BINARY REPRESENTATION &mdash; HOVER EACH BIT</p>
-        <div className="bits-row">
-          <div className="bit-col"><span className="weight">128</span><div className="bit on">1</div></div>
-          <div className="bit-col"><span className="weight">64</span><div className="bit off">0</div></div>
-          <div className="bit-col"><span className="weight">32</span><div className="bit on">1</div></div>
-          <div className="bit-col"><span className="weight">16</span><div className="bit on">1</div></div>
-          <div className="bit-col"><span className="weight">8</span><div className="bit off">0</div></div>
-          <div className="bit-col"><span className="weight">4</span><div className="bit on">1</div></div>
-          <div className="bit-col"><span className="weight">2</span><div className="bit on">1</div></div>
-          <div className="bit-col"><span className="weight">1</span><div className="bit off">0</div></div>
-        </div>
+      <S04_Group1_BinaryWidget client:load />
         <div className="widget-result">
           <span className="equals">= </span><span className="decimal">182</span> <span className="label">in decimal</span>
         </div>
